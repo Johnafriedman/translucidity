@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Translucidity — Interactive 3D Bubbles</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fullscreen WebGL/Canvas Animation Layer -->
+  <canvas id="bubble-canvas"></canvas>
+
+  <!-- Interaction Guidance Banner -->
+  <div class="hint-bar" id="hint-bar">
+    <span class="hint-icon">🫧</span>
+    <span class="hint-text"><strong>Move mouse</strong> or <strong>2-finger drag</strong> to tilt camera • <strong>Click & hold</strong> to stream • Tap to pop</span>
+  </div>
+
+  <!-- Floating HUD / Glassmorphic Control Drawer -->
+  <div class="hud" id="hud">
+    <div class="hud-header">
+      <div class="hud-title-group">
+        <h1 class="hud-title">Translucidity</h1>
+        <span class="hud-subtitle">3D Buoyancy & Depth Simulation</span>
+      </div>
+      <button id="toggle-hud-btn" class="icon-btn" title="Toggle Controls (H)" aria-label="Toggle Controls">
+        ✕ Close
+      </button>
+    </div>
+
+    <div class="hud-body">
+      <!-- Theme Selection -->
+      <div class="control-group">
+        <label for="theme-select">Color Theme</label>
+        <select id="theme-select" class="hud-select">
+          <option value="iridescent">Iridescent Soap</option>
+          <option value="oceanic">Deep Oceanic</option>
+          <option value="bioluminescent">Bioluminescent</option>
+          <option value="sunset">Sunset Opal</option>
+          <option value="monochrome">Crystal Glass</option>
+        </select>
+      </div>
+
+      <!-- Buoyancy (Vertical Rise Speed) -->
+      <div class="control-group">
+        <div class="control-label-row">
+          <label for="buoyancy-slider">Buoyancy (Rise Speed)</label>
+          <span class="val-badge" id="buoyancy-val">75</span>
+        </div>
+        <input type="range" id="buoyancy-slider" min="20" max="220" value="75" step="5">
+        <div class="slider-caption">Larger bubbles rise faster via non-linear volume scaling</div>
+      </div>
+
+      <!-- Depth Drift (Z-Axis Speed) -->
+      <div class="control-group">
+        <div class="control-label-row">
+          <label for="depth-speed-slider">Depth Drift (Z-Speed)</label>
+          <span class="val-badge" id="depth-speed-val">110</span>
+        </div>
+        <input type="range" id="depth-speed-slider" min="20" max="280" value="110" step="5">
+        <div class="slider-caption">Rate at which bubbles travel away from camera & shrink</div>
+      </div>
+
+      <!-- Stream Rate -->
+      <div class="control-group">
+        <div class="control-label-row">
+          <label for="stream-rate-slider">Pointer Stream Rate</label>
+          <span class="val-badge" id="stream-rate-val">50</span>
+        </div>
+        <input type="range" id="stream-rate-slider" min="10" max="120" value="50" step="5">
+        <div class="slider-caption">Bubbles emitted per second while mouse or touch is held</div>
+      </div>
+
+      <!-- Camera Tilt Range -->
+      <div class="control-group">
+        <div class="control-label-row">
+          <label for="camera-tilt-slider">Camera Tilt Range</label>
+          <span class="val-badge" id="camera-tilt-val">26°</span>
+        </div>
+        <input type="range" id="camera-tilt-slider" min="0" max="55" value="26" step="2">
+        <div class="slider-caption">Tilt angle on pointer hover or 2-finger touch</div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="button-row">
+        <button id="camera-tilt-btn" class="hud-btn">🎥 Tilt: On</button>
+        <button id="reset-camera-btn" class="hud-btn">🎯 Center (R)</button>
+      </div>
+
+      <div class="button-row">
+        <button id="sound-btn" class="hud-btn">🔊 Sound: On</button>
+        <button id="pause-btn" class="hud-btn">⏸ Pause</button>
+      </div>
+
+      <div class="button-row">
+        <button id="pop-all-btn" class="hud-btn btn-accent">💥 Pop All</button>
+      </div>
+
+      <!-- Status / Telemetry Footer -->
+      <div class="telemetry">
+        <div class="telemetry-item">
+          <span class="telemetry-label">Active Bubbles</span>
+          <span class="telemetry-value" id="bubble-count">0</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="telemetry-label">Frame Rate</span>
+          <span class="telemetry-value" id="fps-count">60</span> <span class="unit">FPS</span>
+        </div>
+      </div>
+
+      <div class="hud-shortcuts">
+        <span>Shortcuts: <strong>Space</strong> (Pause) • <strong>C</strong> (Pop All) • <strong>R</strong> (Center) • <strong>H</strong> (HUD)</span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

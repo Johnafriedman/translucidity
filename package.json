@@ -1,0 +1,20 @@
+{
+  "name": "translucidity",
+  "version": "1.0.0",
+  "description": "Interactive 3D bubble animation with size-dependent buoyancy, z-depth motion, and pointer streaming",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "canvas",
+    "3d",
+    "bubbles",
+    "animation",
+    "physics",
+    "interactive"
+  ],
+  "author": "",
+  "license": "MIT"
+}
